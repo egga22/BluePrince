@@ -26,7 +26,7 @@
         }
 
         /* Header */
-        . header {
+        .header {
             text-align: center;
             padding: 20px;
             background: rgba(0, 0, 0, 0.3);
@@ -43,12 +43,12 @@
             margin-bottom: 10px;
         }
 
-        .header . subtitle {
+        .header .subtitle {
             color: #a0a0a0;
             font-style: italic;
         }
 
-        . permanent-upgrades {
+        .permanent-upgrades {
             position: absolute;
             top: 10px;
             right: 15px;
@@ -88,7 +88,7 @@
             transition: all 0.3s ease;
         }
 
-        .stat. warning {
+        .stat.warning {
             background: rgba(255, 107, 107, 0.3);
             border: 1px solid #ff6b6b;
             animation: warningPulse 1s infinite;
@@ -155,12 +155,12 @@
             color: #d4a5ff;
         }
 
-        . estate-wrapper {
+        .estate-wrapper {
             position: relative;
             padding-left: 35px;
         }
 
-        . rank-labels {
+        .rank-labels {
             position: absolute;
             left: 0;
             top: 0;
@@ -178,7 +178,7 @@
             padding-right: 5px;
         }
 
-        . rank-label-item.current-rank {
+        .rank-label-item.current-rank {
             color: #ffd700;
             font-weight: bold;
         }
@@ -192,7 +192,7 @@
             border-radius:  8px;
         }
 
-        . room-cell {
+        .room-cell {
             aspect-ratio: 1;
             background: rgba(30, 40, 60, 0.8);
             border: 2px solid #2a3a5a;
@@ -209,7 +209,7 @@
             overflow: hidden;
         }
 
-        .room-cell:hover:not(. empty):not(.locked) {
+        .room-cell:hover:not(.empty):not(.locked) {
             transform: scale(1.05);
             border-color: #7eb8da;
             box-shadow: 0 0 15px rgba(126, 184, 218, 0.3);
@@ -233,22 +233,22 @@
             50% { background: rgba(60, 90, 130, 0.5); }
         }
 
-        . room-cell.current {
+        .room-cell.current {
             border-color: #ffd700;
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             animation: pulse 2s infinite;
         }
 
-        . room-cell.visited {
+        .room-cell.visited {
             opacity: 0.7;
         }
 
-        .room-cell. locked {
+        .room-cell.locked {
             background: rgba(60, 30, 30, 0.8);
             border-color: #8b0000;
         }
 
-        .room-cell. room-46 {
+        .room-cell.room-46 {
             background: linear-gradient(135deg, #4a1a7a, #2a0a4a);
             border-color: #9b59b6;
             animation: glow 2s infinite alternate;
@@ -259,7 +259,7 @@
             border-color:  #27ae60;
         }
 
-        .room-cell. shop {
+        .room-cell.shop {
             background: linear-gradient(135deg, #4a4a1a, #2a2a0a);
             border-color: #f1c40f;
         }
@@ -279,7 +279,7 @@
             100% { box-shadow: 0 0 25px #9b59b6; }
         }
 
-        . room-icon {
+        .room-icon {
             font-size: 1.8em;
             margin-bottom:  3px;
         }
@@ -291,7 +291,7 @@
             padding: 0 2px;
         }
 
-        . room-badge {
+        .room-badge {
             position: absolute;
             top: 2px;
             right: 2px;
@@ -339,7 +339,7 @@
             margin-bottom:  10px;
         }
 
-        . tab {
+        .tab {
             flex: 1;
             padding:  8px;
             background: rgba(40, 50, 70, 0.5);
@@ -364,7 +364,7 @@
             display: none;
         }
 
-        .tab-content. active {
+        .tab-content.active {
             display: block;
         }
 
@@ -397,19 +397,19 @@
             background: rgba(80, 100, 130, 0.8);
         }
 
-        .room-choice. locked {
+        .room-choice.locked {
             opacity: 0.5;
             cursor: not-allowed;
         }
 
-        . room-choice-header {
+        .room-choice-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom:  5px;
         }
 
-        . room-choice-icon {
+        .room-choice-icon {
             font-size: 1.5em;
         }
 
@@ -436,7 +436,7 @@
             color: #a0a0a0;
         }
 
-        . room-choice-effect {
+        .room-choice-effect {
             font-size: 0.8em;
             color: #7eb8da;
             margin-top: 5px;
@@ -456,7 +456,7 @@
             margin-top:  10px;
         }
 
-        . action-buttons-row {
+        .action-buttons-row {
             display: flex;
             gap: 8px;
         }
@@ -566,8 +566,8 @@
             min-width: 30px;
         }
 
-        .message. good { color: #7eb8da; }
-        . message.bad { color: #ff6b6b; }
+        .message.good { color: #7eb8da; }
+        .message.bad { color: #ff6b6b; }
         .message.neutral { color: #a0a0a0; }
         .message.special { color: #d4a5ff; }
         .message.gold { color: #ffd700; }
@@ -622,7 +622,7 @@
             overflow-y:  auto;
         }
 
-        . artifact-item {
+        .artifact-item {
             background:  rgba(155, 89, 182, 0.2);
             border: 1px solid #9b59b6;
             padding: 8px;
@@ -646,7 +646,7 @@
             font-size: 0.9em;
         }
 
-        . artifact-effect {
+        .artifact-effect {
             color: #a0a0a0;
             font-size: 0.75em;
         }
@@ -689,7 +689,7 @@
             transition: all 0.2s ease;
         }
 
-        .achievement. unlocked {
+        .achievement.unlocked {
             background: rgba(255, 215, 0, 0.3);
             border-color: #ffd700;
         }
@@ -746,12 +746,12 @@
             font-size: 1.8em;
         }
 
-        . modal p {
+        .modal p {
             margin-bottom: 15px;
             line-height: 1.6;
         }
 
-        .modal . stats-summary {
+        .modal .stats-summary {
             background: rgba(0, 0, 0, 0.3);
             padding: 15px;
             border-radius:  8px;
@@ -791,7 +791,7 @@
             transition: all 0.2s ease;
         }
 
-        .shop-item:hover: not(. sold-out) {
+        .shop-item:hover:not(.sold-out) {
             background: rgba(60, 70, 90, 0.5);
             border-color: #7eb8da;
         }
@@ -805,7 +805,7 @@
             font-size:  2em;
         }
 
-        . shop-item-info {
+        .shop-item-info {
             flex: 1;
         }
 
@@ -860,7 +860,7 @@
             background: rgba(74, 111, 165, 0.5);
         }
 
-        .puzzle-tile. selected {
+        .puzzle-tile.selected {
             border-color: #ffd700;
             background: rgba(255, 215, 0, 0.2);
         }
@@ -872,7 +872,7 @@
             margin-top: 15px;
         }
 
-        . puzzle-input input {
+        .puzzle-input input {
             background: rgba(20, 30, 50, 0.8);
             border: 1px solid #4a6fa5;
             padding: 10px;
@@ -884,7 +884,7 @@
         }
 
         /* Event animations */
-        . event-flash {
+        .event-flash {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -951,7 +951,7 @@
             margin-top: 3px;
         }
 
-        . quest-progress {
+        .quest-progress {
             font-size: 0.75em;
             color: #7eb8da;
             margin-top: 5px;
@@ -976,13 +976,13 @@
             font-size: 0.75em;
         }
 
-        . legend-item {
+        .legend-item {
             display:  flex;
             align-items:  center;
             gap: 5px;
         }
 
-        . legend-color {
+        .legend-color {
             width:  12px;
             height: 12px;
             border-radius:  3px;
@@ -1340,7 +1340,7 @@
                 desc: 'A place of ancient power', effect: '+50 XP, Blessing',
                 action: (g) => {
                     g.xp += 50;
-                    g. blessings += 1;
+                    g.blessings += 1;
                     return '+50 XP and received a Blessing!';
                 }
             },
@@ -1368,7 +1368,7 @@
                     const artifacts = ['compass', 'map_fragment', 'crystal_ball', 'ancient_tome'];
                     const artifact = artifacts[Math.floor(Math.random() * artifacts.length)];
                     g.addArtifact(artifact);
-                    return `Found artifact: ${ARTIFACTS[artifact]. name}! `;
+                    return `Found artifact: ${ARTIFACTS[artifact].name}! `;
                 }
             },
             alchemyLab: {
@@ -1376,7 +1376,7 @@
                 desc: 'Bubbling potions everywhere', effect: '+3 Potions, +20 Health',
                 action: (g) => {
                     g.potions += 3;
-                    g. health = Math.min(100, g. health + 20);
+                    g.health = Math.min(100, g.health + 20);
                     return '+3 Potions and +20 Health!';
                 }
             },
@@ -1521,9 +1521,9 @@
                 desc:  'A magical orchard', effect: 'PERMANENT:  +5 Starting Steps',
                 category: 'secret',
                 action: (g) => {
-                    if (! g.permanentUpgrades. includes('orchard')) {
-                        g. permanentUpgrades.push('orchard');
-                        g. baseSteps += 5;
+                    if (!g.permanentUpgrades.includes('orchard')) {
+                        g.permanentUpgrades.push('orchard');
+                        g.baseSteps += 5;
                         g.savePermanent();
                         return '🌟 PERMANENT UPGRADE: +5 Starting Steps forever!';
                     }
@@ -1538,7 +1538,7 @@
                 action: (g) => {
                     if (!g.permanentUpgrades.includes('forge')) {
                         g.permanentUpgrades.push('forge');
-                        g. baseKeys += 1;
+                        g.baseKeys += 1;
                         g.savePermanent();
                         return '🌟 PERMANENT UPGRADE: +1 Starting Key forever!';
                     }
@@ -1582,4 +1582,976 @@
             shield: { name: 'Guardian Shield', icon: '🛡️', desc: 'Halves trap damage', effect: 'defense' },
             boots: { name: 'Swift Boots', icon: '👢', desc: '+3 Steps per room', effect: 'speed' },
             amulet: { name: 'Life Amulet', icon: '📿', desc: 'Revive once per day', effect: 'revive' },
-            crown: { name: 'Royal Crown', icon: '👑', desc: 'Shops 50
+            crown: { name: 'Royal Crown', icon: '👑', desc: 'Shops 50% cheaper', effect: 'discount' }
+        };
+
+        // ============== SHOP ITEMS ==============
+        const SHOP_ITEMS = {
+            regular: [
+                { id: 'food', name: 'Bread Loaf', icon: '🍞', desc: '+3 Food', price: 10, action: (g) => { g.food += 3; } },
+                { id: 'potion', name: 'Health Potion', icon: '💊', desc: '+1 Potion', price: 15, action: (g) => { g.potions += 1; } },
+                { id: 'key', name: 'Spare Key', icon: '🔑', desc: '+1 Key', price: 25, action: (g) => { g.keys += 1; } },
+                { id: 'map', name: 'Estate Map', icon: '🗺️', desc: '+15 Steps', price: 20, action: (g) => { g.steps += 15; } },
+                { id: 'gem', name: 'Small Gem', icon: '💎', desc: '+1 Gem', price: 40, action: (g) => { g.gems += 1; } }
+            ],
+            blackMarket: [
+                { id: 'artifact_compass', name: 'Mystic Compass', icon: '🧭', desc: 'Shows Room 46 direction', price: 80, action: (g) => { g.addArtifact('compass'); } },
+                { id: 'artifact_boots', name: 'Swift Boots', icon: '👢', desc: '+3 Steps per room', price: 60, action: (g) => { g.addArtifact('boots'); } },
+                { id: 'artifact_shield', name: 'Guardian Shield', icon: '🛡️', desc: 'Halves trap damage', price: 70, action: (g) => { g.addArtifact('shield'); } },
+                { id: 'mega_key', name: 'Master Key', icon: '🗝️', desc: '+3 Keys', price: 50, action: (g) => { g.keys += 3; } },
+                { id: 'elixir', name: 'Elixir of Life', icon: '🧪', desc: 'Full Health + 3 Potions', price: 100, action: (g) => { g.health = 100; g.potions += 3; } }
+            ]
+        };
+
+        // ============== PUZZLES ==============
+        const PUZZLES = {
+            sequence: {
+                name: 'Number Sequence',
+                generate: () => {
+                    const sequences = [
+                        { seq: [2, 4, 6, 8], answer: 10, hint: 'Add 2 each time' },
+                        { seq: [1, 4, 9, 16], answer: 25, hint: 'Perfect squares' },
+                        { seq: [1, 1, 2, 3, 5], answer: 8, hint: 'Fibonacci' },
+                        { seq: [3, 6, 12, 24], answer: 48, hint: 'Double each time' },
+                        { seq: [100, 50, 25], answer: 12.5, hint: 'Halve each time' }
+                    ];
+                    return sequences[Math.floor(Math.random() * sequences.length)];
+                }
+            },
+            riddle: {
+                name: 'Riddle',
+                generate: () => {
+                    const riddles = [
+                        { question: 'I have keys but no locks. I have space but no room. You can enter but cannot go inside. What am I?', answer: 'keyboard' },
+                        { question: 'The more you take, the more you leave behind. What am I?', answer: 'footsteps' },
+                        { question: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?', answer: 'echo' },
+                        { question: 'What has a head and a tail but no body?', answer: 'coin' },
+                        { question: 'I am always hungry. I must be fed. The finger I touch will soon turn red. What am I?', answer: 'fire' }
+                    ];
+                    return riddles[Math.floor(Math.random() * riddles.length)];
+                }
+            }
+        };
+
+        // ============== EVENTS ==============
+        const EVENTS = {
+            boss: {
+                title: '🐉 Guardian Battle!',
+                desc: 'A fearsome guardian blocks your path. Fight or flee?',
+                choices: [
+                    { text: '⚔️ Fight (Risk health for rewards)', action: (g) => {
+                        const damage = g.hasArtifact('rusty_sword') ? 15 : 25;
+                        g.health -= damage;
+                        if (Math.random() > 0.3) {
+                            g.gems += 5;
+                            g.coins += 30;
+                            g.addMessage(`Victory! -${damage} Health but +5 Gems, +30 Coins!`, 'good');
+                        } else {
+                            g.addMessage(`Defeated! -${damage} Health.`, 'bad');
+                        }
+                    }},
+                    { text: '🏃 Flee (Lose 10 steps)', action: (g) => {
+                        g.steps -= 10;
+                        g.addMessage('You fled! -10 Steps.', 'neutral');
+                    }},
+                    { text: '🔑 Bribe (Pay 20 coins)', action: (g) => {
+                        if (g.coins >= 20) {
+                            g.coins -= 20;
+                            g.gems += 2;
+                            g.addMessage('Bribed the guardian! -20 Coins, +2 Gems.', 'good');
+                        } else {
+                            g.addMessage('Not enough coins to bribe!', 'bad');
+                        }
+                    }}
+                ]
+            },
+            mystery: {
+                title: '❔ Strange Occurrence',
+                desc: 'Something unusual is happening in this room...',
+                choices: [
+                    { text: '🔍 Investigate', action: (g) => {
+                        const r = Math.random();
+                        if (r < 0.4) {
+                            g.gems += 3;
+                            g.addMessage('Found hidden gems! +3 Gems!', 'good');
+                        } else if (r < 0.7) {
+                            g.health -= 10;
+                            g.addMessage('A trap! -10 Health!', 'bad');
+                        } else {
+                            g.addArtifact('lucky_coin');
+                            g.addMessage('Found a Lucky Coin!', 'special');
+                        }
+                    }},
+                    { text: '🚪 Leave quietly', action: (g) => {
+                        g.addMessage('You left without incident.', 'neutral');
+                    }}
+                ]
+            }
+        };
+
+        // ============== ACHIEVEMENTS ==============
+        const ACHIEVEMENTS = [
+            { id: 'first_room', icon: '🚪', name: 'First Steps', desc: 'Enter your first room', check: (g) => g.roomsVisited > 1 },
+            { id: 'explorer', icon: '🗺️', name: 'Explorer', desc: 'Visit 20 rooms in one day', check: (g) => g.roomsVisited >= 20 },
+            { id: 'rich', icon: '💰', name: 'Wealthy', desc: 'Have 100 coins at once', check: (g) => g.coins >= 100 },
+            { id: 'gem_collector', icon: '💎', name: 'Gem Collector', desc: 'Collect 10 gems', check: (g) => g.totalGems >= 10 },
+            { id: 'survivor', icon: '❤️', name: 'Survivor', desc: 'Survive with 1 health', check: (g) => g.health === 1 },
+            { id: 'artifact_hunter', icon: '🏺', name: 'Artifact Hunter', desc: 'Find 3 artifacts', check: (g) => g.artifacts.length >= 3 },
+            { id: 'veteran', icon: '📅', name: 'Veteran', desc: 'Survive 5 days', check: (g) => g.day >= 5 },
+            { id: 'deep_explorer', icon: '📍', name: 'Deep Explorer', desc: 'Reach Rank 7', check: (g) => g.maxRankReached >= 7 },
+            { id: 'winner', icon: '👑', name: 'Champion', desc: 'Find Room 46', check: (g) => g.hasWon }
+        ];
+
+        // ============== QUESTS ==============
+        const QUESTS = [
+            { id: 'explore_5', name: 'Explore 5 Rooms', desc: 'Visit 5 different rooms', target: 5, progress: (g) => g.roomsVisited, reward: { coins: 20 } },
+            { id: 'collect_gems', name: 'Gem Hunter', desc: 'Collect 5 gems', target: 5, progress: (g) => g.gems, reward: { keys: 1 } },
+            { id: 'reach_rank_3', name: 'Go Deeper', desc: 'Reach Rank 3', target: 3, progress: (g) => g.currentRank, reward: { gems: 2 } },
+            { id: 'find_artifact', name: 'Artifact Seeker', desc: 'Find an artifact', target: 1, progress: (g) => g.artifacts.length, reward: { coins: 30, food: 2 } }
+        ];
+
+        // ============== GAME STATE ==============
+        class GameState {
+            constructor() {
+                this.loadPermanent();
+                this.reset();
+            }
+
+            loadPermanent() {
+                const saved = localStorage.getItem('bluePrince_permanent');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    this.permanentUpgrades = data.upgrades || [];
+                    this.baseSteps = data.baseSteps || 50;
+                    this.baseKeys = data.baseKeys || 1;
+                    this.baseGems = data.baseGems || 0;
+                    this.totalGems = data.totalGems || 0;
+                    this.notes = data.notes || '';
+                    this.unlockedAchievements = data.achievements || [];
+                } else {
+                    this.permanentUpgrades = [];
+                    this.baseSteps = 50;
+                    this.baseKeys = 1;
+                    this.baseGems = 0;
+                    this.totalGems = 0;
+                    this.notes = '';
+                    this.unlockedAchievements = [];
+                }
+            }
+
+            savePermanent() {
+                localStorage.setItem('bluePrince_permanent', JSON.stringify({
+                    upgrades: this.permanentUpgrades,
+                    baseSteps: this.baseSteps,
+                    baseKeys: this.baseKeys,
+                    baseGems: this.baseGems,
+                    totalGems: this.totalGems,
+                    notes: this.notes,
+                    achievements: this.unlockedAchievements
+                }));
+            }
+
+            reset() {
+                this.steps = this.baseSteps;
+                this.health = 100;
+                this.food = 3;
+                this.coins = 10;
+                this.keys = this.baseKeys;
+                this.gems = this.baseGems;
+                this.xp = 0;
+                this.potions = 0;
+                this.blessings = 0;
+                this.day = parseInt(localStorage.getItem('bluePrince_day') || '1');
+                this.turn = 1;
+                this.roomsVisited = 1;
+                this.currentRank = 1;
+                this.maxRankReached = 1;
+                this.artifacts = [];
+                this.hasWon = false;
+                this.selectedRoom = null;
+                this.selectedPosition = null;
+                this.roomChoices = [];
+                this.shopItems = [];
+                this.weather = this.generateWeather();
+                
+                // Initialize estate grid (9 ranks x 5 columns)
+                this.estateGrid = Array(9).fill(null).map(() => Array(5).fill(null));
+                // Start at entrance (rank 0, middle column)
+                this.estateGrid[0][2] = { type: 'entrance', name: 'Entrance Hall', icon: '🏛️', visited: true, current: true };
+                this.currentPosition = { rank: 0, col: 2 };
+                
+                this.generateRoomChoices();
+            }
+
+            generateWeather() {
+                const weathers = [
+                    { name: 'Clear', icon: '☀️', effect: null },
+                    { name: 'Rainy', icon: '🌧️', effect: 'steps_penalty' },
+                    { name: 'Foggy', icon: '🌫️', effect: 'hidden_rooms' },
+                    { name: 'Stormy', icon: '⛈️', effect: 'danger_bonus' },
+                    { name: 'Moonlit', icon: '🌙', effect: 'secret_bonus' }
+                ];
+                return weathers[Math.floor(Math.random() * weathers.length)];
+            }
+
+            generateRoomChoices() {
+                this.roomChoices = [];
+                const numChoices = 3;
+                const availableRooms = Object.keys(ROOM_TYPES).filter(k => k !== 'room46');
+                
+                // Weight by rarity
+                const rarityWeights = { common: 40, uncommon: 30, rare: 20, epic: 8, legendary: 2 };
+                
+                for (let i = 0; i < numChoices; i++) {
+                    let selected = null;
+                    const roll = Math.random() * 100;
+                    let cumulative = 0;
+                    
+                    for (const rarity of ['common', 'uncommon', 'rare', 'epic', 'legendary']) {
+                        cumulative += rarityWeights[rarity];
+                        if (roll < cumulative) {
+                            const roomsOfRarity = availableRooms.filter(k => ROOM_TYPES[k].rarity === rarity);
+                            if (roomsOfRarity.length > 0) {
+                                selected = roomsOfRarity[Math.floor(Math.random() * roomsOfRarity.length)];
+                            }
+                            break;
+                        }
+                    }
+                    
+                    if (!selected) {
+                        selected = availableRooms[Math.floor(Math.random() * availableRooms.length)];
+                    }
+                    
+                    this.roomChoices.push(selected);
+                }
+                
+                // Chance to add Room 46 if at high rank
+                if (this.currentRank >= 7 && Math.random() < 0.15) {
+                    this.roomChoices[Math.floor(Math.random() * this.roomChoices.length)] = 'room46';
+                }
+            }
+
+            getValidPositions() {
+                const positions = [];
+                const nextRank = this.currentRank + 1;
+                
+                if (nextRank < 9) {
+                    // Can place in adjacent columns of next rank
+                    for (let col = Math.max(0, this.currentPosition.col - 1); col <= Math.min(4, this.currentPosition.col + 1); col++) {
+                        if (!this.estateGrid[nextRank][col]) {
+                            positions.push({ rank: nextRank, col });
+                        }
+                    }
+                }
+                
+                return positions;
+            }
+
+            placeRoom(roomType, position) {
+                const room = ROOM_TYPES[roomType];
+                if (!room) return false;
+                
+                // Check costs
+                if (room.cost) {
+                    for (const [resource, amount] of Object.entries(room.cost)) {
+                        if (this[resource] < amount) {
+                            this.addMessage(`Not enough ${resource}!`, 'bad');
+                            return false;
+                        }
+                    }
+                }
+                
+                // Place the room
+                this.estateGrid[position.rank][position.col] = {
+                    type: roomType,
+                    name: room.name,
+                    icon: room.icon,
+                    category: room.category,
+                    visited: false,
+                    current: false
+                };
+                
+                // Move to new room
+                this.moveToRoom(position);
+                
+                return true;
+            }
+
+            moveToRoom(position) {
+                // Clear current marker
+                if (this.currentPosition) {
+                    this.estateGrid[this.currentPosition.rank][this.currentPosition.col].current = false;
+                }
+                
+                // Set new position
+                this.currentPosition = position;
+                const room = this.estateGrid[position.rank][position.col];
+                room.current = true;
+                room.visited = true;
+                
+                // Update stats
+                this.currentRank = position.rank + 1;
+                this.maxRankReached = Math.max(this.maxRankReached, this.currentRank);
+                this.roomsVisited++;
+                this.turn++;
+                
+                // Consume steps
+                let stepCost = 1;
+                if (this.weather.effect === 'steps_penalty') stepCost = 2;
+                if (this.hasArtifact('boots')) this.steps += 3;
+                this.steps -= stepCost;
+                
+                // Execute room action
+                const roomType = ROOM_TYPES[room.type];
+                if (roomType && roomType.action) {
+                    const result = roomType.action(this);
+                    if (result) {
+                        const msgType = room.category === 'danger' ? 'bad' : 
+                                       room.category === 'secret' ? 'special' : 
+                                       room.category === 'shop' ? 'gold' : 'good';
+                        this.addMessage(result, msgType);
+                    }
+                }
+                
+                // Check for game over conditions
+                if (this.health <= 0) {
+                    this.health = 0;
+                    if (this.hasArtifact('amulet')) {
+                        this.health = 50;
+                        this.artifacts = this.artifacts.filter(a => a !== 'amulet');
+                        this.addMessage('Life Amulet saved you! +50 Health!', 'special');
+                    } else {
+                        this.endDay('death');
+                        return;
+                    }
+                }
+                
+                if (this.steps <= 0) {
+                    this.steps = 0;
+                    this.endDay('exhausted');
+                    return;
+                }
+                
+                // Generate new room choices
+                this.generateRoomChoices();
+                this.selectedRoom = null;
+                this.selectedPosition = null;
+                
+                // Check achievements
+                this.checkAchievements();
+                
+                // Update UI
+                updateUI();
+            }
+
+            addMessage(text, type = 'neutral') {
+                const log = document.getElementById('messageLog');
+                const msg = document.createElement('div');
+                msg.className = `message ${type}`;
+                msg.innerHTML = `<span class="message-time">${this.turn}</span> ${text}`;
+                log.insertBefore(msg, log.firstChild);
+                
+                // Keep only last 50 messages
+                while (log.children.length > 50) {
+                    log.removeChild(log.lastChild);
+                }
+            }
+
+            addArtifact(artifactId) {
+                if (!this.artifacts.includes(artifactId) && ARTIFACTS[artifactId]) {
+                    this.artifacts.push(artifactId);
+                    this.addMessage(`🏺 Found artifact: ${ARTIFACTS[artifactId].name}!`, 'special');
+                    showEventFlash(ARTIFACTS[artifactId].icon);
+                }
+            }
+
+            hasArtifact(artifactId) {
+                return this.artifacts.includes(artifactId);
+            }
+
+            eatFood() {
+                if (this.food > 0) {
+                    this.food--;
+                    this.steps += 10;
+                    this.addMessage('+10 Steps from eating!', 'good');
+                    updateUI();
+                }
+            }
+
+            usePotion() {
+                if (this.potions > 0) {
+                    this.potions--;
+                    this.health = Math.min(100, this.health + 25);
+                    this.addMessage('+25 Health from potion!', 'good');
+                    updateUI();
+                }
+            }
+
+            rerollRooms() {
+                if (this.coins >= 5) {
+                    this.coins -= 5;
+                    this.generateRoomChoices();
+                    this.addMessage('Rerolled room choices! -5 Coins', 'neutral');
+                    updateUI();
+                }
+            }
+
+            openShop(type = 'regular') {
+                this.shopItems = [...SHOP_ITEMS[type]];
+                this.shopItems.forEach(item => item.sold = false);
+                showShopModal();
+            }
+
+            buyItem(itemIndex) {
+                const item = this.shopItems[itemIndex];
+                if (!item || item.sold) return;
+                
+                let price = item.price;
+                if (this.hasArtifact('crown')) price = Math.floor(price * 0.5);
+                
+                if (this.coins >= price) {
+                    this.coins -= price;
+                    item.action(this);
+                    item.sold = true;
+                    this.addMessage(`Bought ${item.name}! -${price} Coins`, 'gold');
+                    updateShopModal();
+                    updateUI();
+                }
+            }
+
+            openPuzzle(type) {
+                this.currentPuzzle = PUZZLES[type].generate();
+                this.currentPuzzleType = type;
+                showPuzzleModal(type);
+            }
+
+            solvePuzzle(answer) {
+                let correct = false;
+                if (this.currentPuzzleType === 'sequence') {
+                    correct = parseFloat(answer) === this.currentPuzzle.answer;
+                } else if (this.currentPuzzleType === 'riddle') {
+                    correct = answer.toLowerCase().trim() === this.currentPuzzle.answer.toLowerCase();
+                }
+                
+                if (correct) {
+                    this.gems += 3;
+                    this.xp += 30;
+                    this.addMessage('Puzzle solved! +3 Gems, +30 XP!', 'special');
+                    showEventFlash('✨');
+                } else {
+                    this.health -= 10;
+                    this.addMessage('Wrong answer! -10 Health', 'bad');
+                }
+                
+                closePuzzle();
+                updateUI();
+            }
+
+            openEvent(type) {
+                const event = EVENTS[type];
+                showEventModal(event);
+            }
+
+            endDay(reason = 'manual') {
+                const messages = {
+                    death: 'You have fallen...',
+                    exhausted: 'Too exhausted to continue...',
+                    manual: 'You rest for the night...'
+                };
+                
+                this.addMessage(messages[reason], reason === 'manual' ? 'neutral' : 'bad');
+                
+                // Save day progress
+                localStorage.setItem('bluePrince_day', (this.day + 1).toString());
+                
+                // Show end day modal
+                document.getElementById('roomsExplored').textContent = this.roomsVisited;
+                document.getElementById('highestRank').textContent = this.maxRankReached;
+                document.getElementById('xpGained').textContent = this.xp;
+                document.getElementById('totalDays').textContent = this.day;
+                
+                // Award gems based on progress
+                const gemsEarned = Math.floor(this.maxRankReached / 2) + Math.floor(this.xp / 50);
+                if (gemsEarned > 0) {
+                    this.totalGems += gemsEarned;
+                    this.savePermanent();
+                    document.getElementById('dayEndRewards').innerHTML = `<p class="good">+${gemsEarned} 💎 Gems earned!</p>`;
+                }
+                
+                document.getElementById('dayEndModal').classList.add('active');
+            }
+
+            victory() {
+                this.hasWon = true;
+                document.getElementById('victoryDays').textContent = this.day;
+                document.getElementById('victoryRooms').textContent = this.roomsVisited;
+                document.getElementById('victoryArtifacts').textContent = this.artifacts.length;
+                document.getElementById('victoryScore').textContent = this.calculateScore();
+                document.getElementById('victoryModal').classList.add('active');
+                
+                // Unlock achievement
+                if (!this.unlockedAchievements.includes('winner')) {
+                    this.unlockedAchievements.push('winner');
+                    this.savePermanent();
+                }
+            }
+
+            calculateScore() {
+                return this.xp + 
+                       (this.coins * 2) + 
+                       (this.gems * 10) + 
+                       (this.artifacts.length * 50) + 
+                       (100 - this.day) * 10;
+            }
+
+            checkAchievements() {
+                for (const achievement of ACHIEVEMENTS) {
+                    if (!this.unlockedAchievements.includes(achievement.id) && achievement.check(this)) {
+                        this.unlockedAchievements.push(achievement.id);
+                        this.savePermanent();
+                        this.addMessage(`🏆 Achievement: ${achievement.name}!`, 'gold');
+                        showEventFlash('🏆');
+                    }
+                }
+            }
+        }
+
+        // ============== UI FUNCTIONS ==============
+        let game;
+
+        function updateUI() {
+            // Update stats
+            document.getElementById('steps').textContent = game.steps;
+            document.getElementById('health').textContent = game.health;
+            document.getElementById('food').textContent = game.food;
+            document.getElementById('gems').textContent = game.gems;
+            document.getElementById('keys').textContent = game.keys;
+            document.getElementById('coins').textContent = game.coins;
+            document.getElementById('xp').textContent = game.xp;
+            document.getElementById('day').textContent = game.day;
+            document.getElementById('weather').textContent = game.weather.name;
+            document.getElementById('weatherIcon').textContent = game.weather.icon;
+            document.getElementById('roomCount').textContent = game.roomsVisited;
+            document.getElementById('currentRank').textContent = game.currentRank;
+            document.getElementById('turnCounter').textContent = `Turn ${game.turn}`;
+            
+            // Warning states
+            const stepsStat = document.getElementById('stepsStat');
+            stepsStat.classList.toggle('warning', game.steps <= 10);
+            
+            // Update estate grid
+            renderEstateGrid();
+            
+            // Update room selection
+            renderRoomSelection();
+            
+            // Update current room display
+            renderCurrentRoom();
+            
+            // Update inventory
+            renderInventory();
+            
+            // Update quests
+            renderQuests();
+            
+            // Update achievements
+            renderAchievements();
+            
+            // Update buttons
+            document.getElementById('eatFood').disabled = game.food <= 0;
+            document.getElementById('usePotion').disabled = game.potions <= 0;
+            document.getElementById('rerollRooms').disabled = game.coins < 5;
+            
+            // Update permanent upgrades display
+            renderPermanentUpgrades();
+        }
+
+        function renderEstateGrid() {
+            const grid = document.getElementById('estateGrid');
+            grid.innerHTML = '';
+            
+            const validPositions = game.getValidPositions();
+            
+            for (let rank = 8; rank >= 0; rank--) {
+                for (let col = 0; col < 5; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'room-cell';
+                    
+                    const room = game.estateGrid[rank][col];
+                    const isValidPosition = validPositions.some(p => p.rank === rank && p.col === col);
+                    
+                    if (room) {
+                        cell.innerHTML = `
+                            <span class="room-icon">${room.icon}</span>
+                            <span class="room-name">${room.name}</span>
+                        `;
+                        
+                        if (room.current) cell.classList.add('current');
+                        if (room.visited) cell.classList.add('visited');
+                        if (room.category === 'secret') cell.classList.add('secret');
+                        if (room.category === 'shop') cell.classList.add('shop');
+                        if (room.category === 'danger') cell.classList.add('danger');
+                        if (room.category === 'room46') cell.classList.add('room-46');
+                        
+                        cell.onclick = () => showRoomInfo(room);
+                    } else if (isValidPosition && game.selectedRoom) {
+                        cell.classList.add('selectable');
+                        cell.innerHTML = `<span class="room-icon">+</span>`;
+                        cell.onclick = () => selectPosition({ rank, col });
+                    } else {
+                        cell.classList.add('empty');
+                    }
+                    
+                    grid.appendChild(cell);
+                }
+            }
+            
+            // Update rank labels
+            const rankLabels = document.getElementById('rankLabels');
+            rankLabels.innerHTML = '';
+            for (let rank = 9; rank >= 1; rank--) {
+                const label = document.createElement('div');
+                label.className = 'rank-label-item';
+                if (rank === game.currentRank) label.classList.add('current-rank');
+                label.textContent = rank;
+                rankLabels.appendChild(label);
+            }
+        }
+
+        function renderRoomSelection() {
+            const container = document.getElementById('roomSelection');
+            container.innerHTML = '';
+            
+            game.roomChoices.forEach((roomType, index) => {
+                const room = ROOM_TYPES[roomType];
+                const choice = document.createElement('div');
+                choice.className = 'room-choice';
+                if (game.selectedRoom === roomType) choice.classList.add('selected');
+                
+                const rarityClass = `rarity-${room.rarity}`;
+                
+                choice.innerHTML = `
+                    <div class="room-choice-header">
+                        <span class="room-choice-icon">${room.icon}</span>
+                        <span class="room-choice-name">${room.name}</span>
+                        <span class="room-choice-rarity ${rarityClass}">${room.rarity}</span>
+                    </div>
+                    <div class="room-choice-desc">${room.desc}</div>
+                    <div class="room-choice-effect">➤ ${room.effect}</div>
+                    ${room.cost ? `<div class="room-choice-cost">Cost: ${Object.entries(room.cost).map(([k,v]) => `${v} ${k}`).join(', ')}</div>` : ''}
+                `;
+                
+                choice.onclick = () => selectRoom(roomType);
+                container.appendChild(choice);
+            });
+        }
+
+        function renderCurrentRoom() {
+            const display = document.getElementById('currentRoomDisplay');
+            const pos = game.currentPosition;
+            const room = game.estateGrid[pos.rank][pos.col];
+            
+            display.innerHTML = `
+                <div class="current-room-icon">${room.icon}</div>
+                <div class="current-room-name">${room.name}</div>
+                <div class="current-room-desc">Rank ${pos.rank + 1} • ${room.visited ? 'Visited' : 'New'}</div>
+            `;
+        }
+
+        function renderInventory() {
+            const grid = document.getElementById('inventoryGrid');
+            grid.innerHTML = `
+                <div class="inventory-item">
+                    <span class="inventory-icon">🍎</span>
+                    <span>Food</span>
+                    <span class="inventory-count">${game.food}</span>
+                </div>
+                <div class="inventory-item">
+                    <span class="inventory-icon">💊</span>
+                    <span>Potions</span>
+                    <span class="inventory-count">${game.potions}</span>
+                </div>
+                <div class="inventory-item">
+                    <span class="inventory-icon">🔑</span>
+                    <span>Keys</span>
+                    <span class="inventory-count">${game.keys}</span>
+                </div>
+                <div class="inventory-item">
+                    <span class="inventory-icon">✨</span>
+                    <span>Blessings</span>
+                    <span class="inventory-count">${game.blessings}</span>
+                </div>
+            `;
+            
+            // Render artifacts
+            const artifactsList = document.getElementById('artifactsList');
+            if (game.artifacts.length === 0) {
+                artifactsList.innerHTML = '<div style="color: #606060; font-style: italic;">No artifacts found yet...</div>';
+            } else {
+                artifactsList.innerHTML = '';
+                game.artifacts.forEach(artifactId => {
+                    const artifact = ARTIFACTS[artifactId];
+                    const item = document.createElement('div');
+                    item.className = 'artifact-item';
+                    item.innerHTML = `
+                        <span class="artifact-icon">${artifact.icon}</span>
+                        <div class="artifact-info">
+                            <div class="artifact-name">${artifact.name}</div>
+                            <div class="artifact-effect">${artifact.desc}</div>
+                        </div>
+                    `;
+                    artifactsList.appendChild(item);
+                });
+            }
+        }
+
+        function renderQuests() {
+            const list = document.getElementById('questsList');
+            list.innerHTML = '';
+            
+            QUESTS.forEach(quest => {
+                const progress = quest.progress(game);
+                const complete = progress >= quest.target;
+                
+                const item = document.createElement('div');
+                item.className = 'quest-item';
+                item.style.opacity = complete ? '0.5' : '1';
+                item.innerHTML = `
+                    <div class="quest-title">${complete ? '✓' : '○'} ${quest.name}</div>
+                    <div class="quest-desc">${quest.desc}</div>
+                    <div class="quest-progress">${Math.min(progress, quest.target)}/${quest.target}</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${Math.min(100, (progress / quest.target) * 100)}%"></div>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function renderAchievements() {
+            const list = document.getElementById('achievementsList');
+            list.innerHTML = '';
+            
+            ACHIEVEMENTS.forEach(achievement => {
+                const unlocked = game.unlockedAchievements.includes(achievement.id);
+                const item = document.createElement('div');
+                item.className = 'achievement' + (unlocked ? ' unlocked' : '');
+                item.innerHTML = unlocked ? achievement.icon : '?';
+                item.title = `${achievement.name}: ${achievement.desc}`;
+                list.appendChild(item);
+            });
+        }
+
+        function renderPermanentUpgrades() {
+            const container = document.getElementById('permanentUpgrades');
+            container.innerHTML = '';
+            
+            if (game.permanentUpgrades.includes('orchard')) {
+                container.innerHTML += '<span class="upgrade-badge">🍎 +5 Steps</span>';
+            }
+            if (game.permanentUpgrades.includes('forge')) {
+                container.innerHTML += '<span class="upgrade-badge">🔑 +1 Key</span>';
+            }
+            if (game.permanentUpgrades.includes('crystal')) {
+                container.innerHTML += '<span class="upgrade-badge">💎 +2 Gems</span>';
+            }
+        }
+
+        function selectRoom(roomType) {
+            game.selectedRoom = roomType;
+            game.selectedPosition = null;
+            document.getElementById('confirmRoom').disabled = true;
+            renderRoomSelection();
+            renderEstateGrid();
+        }
+
+        function selectPosition(position) {
+            game.selectedPosition = position;
+            document.getElementById('confirmRoom').disabled = false;
+        }
+
+        function confirmRoomPlacement() {
+            if (game.selectedRoom && game.selectedPosition) {
+                game.placeRoom(game.selectedRoom, game.selectedPosition);
+            }
+        }
+
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}Tab`).classList.add('active');
+        }
+
+        function showEventFlash(emoji) {
+            const flash = document.createElement('div');
+            flash.className = 'event-flash';
+            flash.textContent = emoji;
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 1000);
+        }
+
+        function showRoomInfo(room) {
+            // Could show a tooltip or info panel about the room
+            console.log('Room info:', room);
+        }
+
+        // Modal functions
+        function showShopModal() {
+            updateShopModal();
+            document.getElementById('shopModal').classList.add('active');
+        }
+
+        function updateShopModal() {
+            const container = document.getElementById('shopItems');
+            container.innerHTML = '';
+            
+            game.shopItems.forEach((item, index) => {
+                let price = item.price;
+                if (game.hasArtifact('crown')) price = Math.floor(price * 0.5);
+                
+                const element = document.createElement('div');
+                element.className = 'shop-item' + (item.sold ? ' sold-out' : '');
+                element.innerHTML = `
+                    <span class="shop-item-icon">${item.icon}</span>
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">${item.name}${item.sold ? ' (SOLD)' : ''}</div>
+                        <div class="shop-item-desc">${item.desc}</div>
+                    </div>
+                    <span class="shop-item-price">${price} 🪙</span>
+                `;
+                
+                if (!item.sold) {
+                    element.onclick = () => game.buyItem(index);
+                }
+                
+                container.appendChild(element);
+            });
+        }
+
+        function closeShop() {
+            document.getElementById('shopModal').classList.remove('active');
+        }
+
+        function showPuzzleModal(type) {
+            const container = document.getElementById('puzzleContainer');
+            const desc = document.getElementById('puzzleDescription');
+            
+            if (type === 'sequence') {
+                desc.textContent = `Complete the sequence: ${game.currentPuzzle.seq.join(', ')}, ?`;
+                container.innerHTML = `
+                    <p style="color: #a0a0a0; font-style: italic;">Hint: ${game.currentPuzzle.hint}</p>
+                    <div class="puzzle-input">
+                        <input type="number" id="puzzleAnswer" placeholder="Enter number...">
+                        <button class="btn btn-primary" onclick="submitPuzzle()">Submit</button>
+                    </div>
+                `;
+            } else if (type === 'riddle') {
+                desc.textContent = game.currentPuzzle.question;
+                container.innerHTML = `
+                    <div class="puzzle-input">
+                        <input type="text" id="puzzleAnswer" placeholder="Enter answer...">
+                        <button class="btn btn-primary" onclick="submitPuzzle()">Submit</button>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('puzzleModal').classList.add('active');
+        }
+
+        function submitPuzzle() {
+            const answer = document.getElementById('puzzleAnswer').value;
+            game.solvePuzzle(answer);
+        }
+
+        function closePuzzle() {
+            document.getElementById('puzzleModal').classList.remove('active');
+        }
+
+        function showEventModal(event) {
+            document.getElementById('eventTitle').textContent = event.title;
+            document.getElementById('eventDescription').textContent = event.desc;
+            
+            const choicesContainer = document.getElementById('eventChoices');
+            choicesContainer.innerHTML = '';
+            
+            event.choices.forEach(choice => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-secondary';
+                btn.style.marginTop = '10px';
+                btn.style.width = '100%';
+                btn.textContent = choice.text;
+                btn.onclick = () => {
+                    choice.action(game);
+                    closeEvent();
+                    updateUI();
+                };
+                choicesContainer.appendChild(btn);
+            });
+            
+            document.getElementById('eventModal').classList.add('active');
+        }
+
+        function closeEvent() {
+            document.getElementById('eventModal').classList.remove('active');
+        }
+
+        function startNewDay() {
+            document.getElementById('dayEndModal').classList.remove('active');
+            game.day++;
+            game.reset();
+            game.addMessage(`Day ${game.day} begins...`, 'special');
+            updateUI();
+        }
+
+        function resetGame() {
+            localStorage.removeItem('bluePrince_day');
+            game = new GameState();
+            document.getElementById('victoryModal').classList.remove('active');
+            updateUI();
+        }
+
+        function continueExploring() {
+            document.getElementById('victoryModal').classList.remove('active');
+        }
+
+        function closeStartModal() {
+            document.getElementById('startModal').classList.remove('active');
+            updateUI();
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            game = new GameState();
+            
+            // Load saved notes
+            const savedNotes = localStorage.getItem('bluePrince_notes');
+            if (savedNotes) {
+                document.getElementById('playerNotes').value = savedNotes;
+                game.notes = savedNotes;
+            }
+            
+            // Note saving
+            document.getElementById('playerNotes').addEventListener('input', (e) => {
+                game.notes = e.target.value;
+                localStorage.setItem('bluePrince_notes', e.target.value);
+            });
+            
+            // Button handlers
+            document.getElementById('confirmRoom').addEventListener('click', confirmRoomPlacement);
+            document.getElementById('eatFood').addEventListener('click', () => game.eatFood());
+            document.getElementById('usePotion').addEventListener('click', () => game.usePotion());
+            document.getElementById('rerollRooms').addEventListener('click', () => game.rerollRooms());
+            document.getElementById('endDay').addEventListener('click', () => game.endDay());
+            
+            // Show start modal
+            document.getElementById('startModal').classList.add('active');
+            
+            updateUI();
+        });
+    </script>
+</body>
+</html>
