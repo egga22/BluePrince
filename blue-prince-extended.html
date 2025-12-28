@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Prince - Room 46</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e8d5b7;
+            overflow-x: hidden;
+        }
+
+        .game-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        . header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border:  2px solid #4a6fa5;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #7eb8da;
+            text-shadow: 0 0 20px rgba(126, 184, 218, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .header . subtitle {
+            color: #a0a0a0;
+            font-style: italic;
+        }
+
+        . permanent-upgrades {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .upgrade-badge {
+            background: rgba(155, 89, 182, 0.3);
+            border: 1px solid #9b59b6;
+            padding:  5px 10px;
+            border-radius: 15px;
+            font-size:  0.8em;
+            color: #d4a5ff;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #4a6fa5;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 15px;
+            background: rgba(74, 111, 165, 0.2);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .stat. warning {
+            background: rgba(255, 107, 107, 0.3);
+            border: 1px solid #ff6b6b;
+            animation: warningPulse 1s infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 107, 107, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 107, 107, 0.8); }
+        }
+
+        .stat-icon {
+            font-size: 1.5em;
+        }
+
+        .stat-value {
+            font-size: 1.3em;
+            font-weight:  bold;
+            color: #7eb8da;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: #a0a0a0;
+        }
+
+        /* Main Game Area */
+        .game-area {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+        }
+
+        @media (max-width: 1000px) {
+            .game-area {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estate Grid */
+        .estate-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #4a6fa5;
+        }
+
+        .estate-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .estate-title {
+            color: #7eb8da;
+            font-size: 1.3em;
+        }
+
+        .floor-indicator {
+            background: rgba(155, 89, 182, 0.3);
+            padding: 5px 15px;
+            border-radius:  20px;
+            font-size: 0.9em;
+            color: #d4a5ff;
+        }
+
+        . estate-wrapper {
+            position: relative;
+            padding-left: 35px;
+        }
+
+        . rank-labels {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .rank-label-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            font-size: 0.75em;
+            color: #606060;
+            padding-right: 5px;
+        }
+
+        . rank-label-item.current-rank {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .estate-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius:  8px;
+        }
+
+        . room-cell {
+            aspect-ratio: 1;
+            background: rgba(30, 40, 60, 0.8);
+            border: 2px solid #2a3a5a;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 70px;
+            overflow: hidden;
+        }
+
+        .room-cell:hover:not(. empty):not(.locked) {
+            transform: scale(1.05);
+            border-color: #7eb8da;
+            box-shadow: 0 0 15px rgba(126, 184, 218, 0.3);
+            z-index: 10;
+        }
+
+        .room-cell.empty {
+            background: rgba(20, 30, 50, 0.5);
+            border-style: dashed;
+            cursor: default;
+        }
+
+        .room-cell.selectable {
+            border-color: #7eb8da;
+            cursor: pointer;
+            animation: selectablePulse 1. 5s infinite;
+        }
+
+        @keyframes selectablePulse {
+            0%, 100% { background: rgba(40, 60, 90, 0.5); }
+            50% { background: rgba(60, 90, 130, 0.5); }
+        }
+
+        . room-cell.current {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        . room-cell.visited {
+            opacity: 0.7;
+        }
+
+        .room-cell. locked {
+            background: rgba(60, 30, 30, 0.8);
+            border-color: #8b0000;
+        }
+
+        .room-cell. room-46 {
+            background: linear-gradient(135deg, #4a1a7a, #2a0a4a);
+            border-color: #9b59b6;
+            animation: glow 2s infinite alternate;
+        }
+
+        .room-cell.secret {
+            background: linear-gradient(135deg, #1a4a2a, #0a2a1a);
+            border-color:  #27ae60;
+        }
+
+        .room-cell. shop {
+            background: linear-gradient(135deg, #4a4a1a, #2a2a0a);
+            border-color: #f1c40f;
+        }
+
+        .room-cell.danger {
+            background: linear-gradient(135deg, #4a1a1a, #2a0a0a);
+            border-color:  #c0392b;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px #9b59b6; }
+            100% { box-shadow: 0 0 25px #9b59b6; }
+        }
+
+        . room-icon {
+            font-size: 1.8em;
+            margin-bottom:  3px;
+        }
+
+        .room-name {
+            text-align: center;
+            font-size: 0.85em;
+            color: #c0c0c0;
+            padding: 0 2px;
+        }
+
+        . room-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 0.7em;
+            background: rgba(0,0,0,0.5);
+            padding: 1px 4px;
+            border-radius:  3px;
+        }
+
+        /* Side Panel */
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .panel-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #4a6fa5;
+        }
+
+        .panel-title {
+            color: #7eb8da;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #4a6fa5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title-badge {
+            font-size: 0.8em;
+            background: rgba(74, 111, 165, 0.3);
+            padding: 2px 8px;
+            border-radius:  10px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap:  5px;
+            margin-bottom:  10px;
+        }
+
+        . tab {
+            flex: 1;
+            padding:  8px;
+            background: rgba(40, 50, 70, 0.5);
+            border:  1px solid #4a6fa5;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            background: rgba(60, 70, 90, 0.5);
+        }
+
+        .tab.active {
+            background: rgba(74, 111, 165, 0.5);
+            border-color: #7eb8da;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content. active {
+            display: block;
+        }
+
+        /* Room Selection */
+        .room-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .room-choice {
+            background: rgba(40, 50, 70, 0.8);
+            border: 2px solid #4a6fa5;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .room-choice:hover {
+            background: rgba(60, 80, 110, 0.8);
+            border-color: #7eb8da;
+            transform: translateX(5px);
+        }
+
+        .room-choice.selected {
+            border-color: #ffd700;
+            background: rgba(80, 100, 130, 0.8);
+        }
+
+        .room-choice. locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        . room-choice-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom:  5px;
+        }
+
+        . room-choice-icon {
+            font-size: 1.5em;
+        }
+
+        .room-choice-name {
+            font-weight: bold;
+            color: #e8d5b7;
+            flex:  1;
+        }
+
+        .room-choice-rarity {
+            font-size:  0.7em;
+            padding: 2px 6px;
+            border-radius: 8px;
+        }
+
+        .rarity-common { background: #95a5a6; color: #000; }
+        .rarity-uncommon { background: #27ae60; color: #fff; }
+        .rarity-rare { background: #3498db; color: #fff; }
+        .rarity-epic { background: #9b59b6; color: #fff; }
+        .rarity-legendary { background: #f39c12; color: #000; }
+
+        .room-choice-desc {
+            font-size: 0.85em;
+            color: #a0a0a0;
+        }
+
+        . room-choice-effect {
+            font-size: 0.8em;
+            color: #7eb8da;
+            margin-top: 5px;
+        }
+
+        .room-choice-cost {
+            font-size: 0.75em;
+            color: #ff6b6b;
+            margin-top: 3px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top:  10px;
+        }
+
+        . action-buttons-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-family: 'Georgia', serif;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a6fa5, #3a5a8a);
+            color: #fff;
+            border:  2px solid #7eb8da;
+        }
+
+        .btn-primary:hover: not(:disabled) {
+            background: linear-gradient(135deg, #5a8fc5, #4a7aaa);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(60, 70, 90, 0.8);
+            color: #e8d5b7;
+            border: 1px solid #4a6fa5;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(80, 90, 110, 0.8);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #8b0000, #5a0000);
+            color:  #fff;
+            border: 2px solid #ff4444;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            color:  #fff;
+            border: 2px solid #2ecc71;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Current Room Display */
+        .current-room-display {
+            text-align: center;
+            padding: 15px;
+            background: rgba(40, 50, 70, 0.5);
+            border-radius: 8px;
+        }
+
+        .current-room-icon {
+            font-size: 3em;
+            margin-bottom:  10px;
+        }
+
+        .current-room-name {
+            font-size: 1.2em;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .current-room-desc {
+            font-size: 0.9em;
+            color: #a0a0a0;
+        }
+
+        .current-room-actions {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /* Message Log */
+        .message-log {
+            max-height: 120px;
+            overflow-y:  auto;
+            font-size: 0.85em;
+        }
+
+        .message {
+            padding: 5px;
+            border-bottom: 1px solid rgba(74, 111, 165, 0.3);
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .message:last-child {
+            border-bottom: none;
+        }
+
+        .message-time {
+            color: #606060;
+            font-size:  0.8em;
+            min-width: 30px;
+        }
+
+        .message. good { color: #7eb8da; }
+        . message.bad { color: #ff6b6b; }
+        .message.neutral { color: #a0a0a0; }
+        .message.special { color: #d4a5ff; }
+        .message.gold { color: #ffd700; }
+
+        /* Inventory */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns:  repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .inventory-item {
+            background: rgba(40, 50, 70, 0.5);
+            padding: 8px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .inventory-item:hover {
+            background: rgba(60, 70, 90, 0.5);
+            border-color: #4a6fa5;
+        }
+
+        .inventory-item.active {
+            border-color: #ffd700;
+        }
+
+        .inventory-icon {
+            font-size: 1.3em;
+        }
+
+        .inventory-count {
+            margin-left: auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size:  0.8em;
+        }
+
+        /* Artifacts */
+        .artifacts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 150px;
+            overflow-y:  auto;
+        }
+
+        . artifact-item {
+            background:  rgba(155, 89, 182, 0.2);
+            border: 1px solid #9b59b6;
+            padding: 8px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .artifact-icon {
+            font-size: 1.5em;
+        }
+
+        .artifact-info {
+            flex: 1;
+        }
+
+        .artifact-name {
+            color: #d4a5ff;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        . artifact-effect {
+            color: #a0a0a0;
+            font-size: 0.75em;
+        }
+
+        /* Notes Section */
+        .notes-textarea {
+            width: 100%;
+            height: 80px;
+            background: rgba(20, 30, 50, 0.8);
+            border: 1px solid #4a6fa5;
+            border-radius: 5px;
+            color: #e8d5b7;
+            padding: 10px;
+            font-family: 'Georgia', serif;
+            resize: vertical;
+        }
+
+        .notes-textarea:: placeholder {
+            color: #606060;
+        }
+
+        /* Achievements */
+        .achievements-bar {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .achievement {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            background: rgba(40, 50, 70, 0.5);
+            border: 2px solid #4a6fa5;
+            cursor: help;
+            transition: all 0.2s ease;
+        }
+
+        .achievement. unlocked {
+            background: rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
+        }
+
+        .achievement:hover {
+            transform: scale(1.2);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height:  100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #4a6fa5;
+            border-radius: 15px;
+            padding: 30px;
+            max-width:  550px;
+            width: 90%;
+            text-align: center;
+            animation: modalIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal h2 {
+            color: #7eb8da;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        . modal p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .modal . stats-summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius:  8px;
+            margin:  20px 0;
+            text-align: left;
+        }
+
+        .stats-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(74, 111, 165, 0.3);
+        }
+
+        .stats-summary-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Shop Modal */
+        .shop-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin:  20px 0;
+            text-align: left;
+        }
+
+        .shop-item {
+            background: rgba(40, 50, 70, 0.5);
+            border: 1px solid #4a6fa5;
+            padding:  12px;
+            border-radius:  8px;
+            display:  flex;
+            align-items:  center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .shop-item:hover: not(. sold-out) {
+            background: rgba(60, 70, 90, 0.5);
+            border-color: #7eb8da;
+        }
+
+        .shop-item.sold-out {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .shop-item-icon {
+            font-size:  2em;
+        }
+
+        . shop-item-info {
+            flex: 1;
+        }
+
+        .shop-item-name {
+            font-weight: bold;
+            color:  #e8d5b7;
+        }
+
+        .shop-item-desc {
+            font-size: 0.85em;
+            color: #a0a0a0;
+        }
+
+        .shop-item-price {
+            background: rgba(241, 196, 15, 0.3);
+            padding: 5px 12px;
+            border-radius:  15px;
+            color: #f1c40f;
+            font-weight: bold;
+        }
+
+        /* Puzzle Modal */
+        .puzzle-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 200px;
+            margin: 0 auto 20px;
+        }
+
+        .puzzle-tile {
+            aspect-ratio: 1;
+            background: rgba(74, 111, 165, 0.3);
+            border: 2px solid #4a6fa5;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .puzzle-tile:hover {
+            background: rgba(74, 111, 165, 0.5);
+        }
+
+        .puzzle-tile. selected {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .puzzle-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        . puzzle-input input {
+            background: rgba(20, 30, 50, 0.8);
+            border: 1px solid #4a6fa5;
+            padding: 10px;
+            border-radius:  5px;
+            color:  #e8d5b7;
+            font-size: 1em;
+            width: 150px;
+            text-align: center;
+        }
+
+        /* Event animations */
+        . event-flash {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            pointer-events: none;
+            animation: eventFlash 1s ease-out forwards;
+            z-index: 2000;
+        }
+
+        @keyframes eventFlash {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -60%) scale(1); }
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: rgba(20, 30, 50, 0.95);
+            border: 1px solid #4a6fa5;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            max-width: 200px;
+            z-index:  1001;
+            pointer-events: none;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a6fa5, #7eb8da);
+            transition:  width 0.3s ease;
+        }
+
+        /* Quest tracker */
+        .quest-item {
+            background: rgba(40, 50, 70, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            border-left: 3px solid #f1c40f;
+        }
+
+        .quest-title {
+            color: #f1c40f;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .quest-desc {
+            font-size: 0.8em;
+            color: #a0a0a0;
+            margin-top: 3px;
+        }
+
+        . quest-progress {
+            font-size: 0.75em;
+            color: #7eb8da;
+            margin-top: 5px;
+        }
+
+        /* Weather effects */
+        .weather-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+        }
+
+        /* Mini map legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top:  10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(74, 111, 165, 0.3);
+            font-size: 0.75em;
+        }
+
+        . legend-item {
+            display:  flex;
+            align-items:  center;
+            gap: 5px;
+        }
+
+        . legend-color {
+            width:  12px;
+            height: 12px;
+            border-radius:  3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏰 Blue Prince</h1>
+            <div class="subtitle">Find the legendary Room 46 in the ever-shifting Mt. Holly Estate</div>
+            <div class="permanent-upgrades" id="permanentUpgrades"></div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat" id="stepsStat">
+                <span class="stat-icon">👣</span>
+                <div>
+                    <div class="stat-value" id="steps">50</div>
+                    <div class="stat-label">Steps</div>
+                </div>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">❤️</span>
+                <div>
+                    <div class="stat-value" id="health">100</div>
+                    <div class="stat-label">Health</div>
+                </div>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">🍎</span>
+                <div>
+                    <div class="stat-value" id="food">3</div>
+                    <div class="stat-label">Food</div>
+                </div>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">💎</span>
+                <div>
+                    <div class="stat-value" id="gems">0</div>
+                    <div class="stat-label">Gems</div>
+                </div>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">🔑</span>
+                <div>
+                    <div class="stat-value" id="keys">1</div>
+                    <div class="stat-label">Keys</div>
+                </div>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">🪙</span>
+                <div>
+                    <div class="stat-value" id="coins">10</div>
+                    <div class="stat-label">Coins</div>
+                </div>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">⭐</span>
+                <div>
+                    <div class="stat-value" id="xp">0</div>
+                    <div class="stat-label">XP</div>
+                </div>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">📅</span>
+                <div>
+                    <div class="stat-value" id="day">1</div>
+                    <div class="stat-label">Day</div>
+                </div>
+            </div>
+            <div class="stat weather-indicator">
+                <span id="weatherIcon">☀️</span>
+                <div>
+                    <div class="stat-value" id="weather">Clear</div>
+                    <div class="stat-label">Weather</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="game-area">
+            <!-- Estate Grid -->
+            <div class="estate-container">
+                <div class="estate-header">
+                    <h2 class="estate-title">Mt.  Holly Estate</h2>
+                    <div class="floor-indicator">
+                        🚪 Rooms:  <span id="roomCount">1</span>/45 | 
+                        📍 Rank: <span id="currentRank">1</span>/9
+                    </div>
+                </div>
+                <div class="estate-wrapper">
+                    <div class="rank-labels" id="rankLabels"></div>
+                    <div class="estate-grid" id="estateGrid"></div>
+                </div>
+                <div class="legend">
+                    <div class="legend-item"><div class="legend-color" style="background: #ffd700; border:  1px solid #fff;"></div> Current</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #4a6fa5;"></div> Visited</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #27ae60;"></div> Secret</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #f1c40f;"></div> Shop</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #c0392b;"></div> Danger</div>
+                    <div class="legend-item"><div class="legend-color" style="background: #9b59b6;"></div> Room 46</div>
+                </div>
+            </div>
+
+            <!-- Side Panel -->
+            <div class="side-panel">
+                <!-- Tabs -->
+                <div class="panel-section">
+                    <div class="tabs">
+                        <div class="tab active" onclick="switchTab('rooms')">🚪 Rooms</div>
+                        <div class="tab" onclick="switchTab('inventory')">🎒 Items</div>
+                        <div class="tab" onclick="switchTab('quests')">📜 Quests</div>
+                    </div>
+
+                    <!-- Rooms Tab -->
+                    <div class="tab-content active" id="roomsTab">
+                        <div class="current-room-display" id="currentRoomDisplay">
+                            <div class="current-room-icon">🏛️</div>
+                            <div class="current-room-name">Entrance Hall</div>
+                            <div class="current-room-desc">The grand entrance to Mt. Holly Estate</div>
+                        </div>
+                        <h4 style="margin:  15px 0 10px; color: #7eb8da;">Choose Next Room:</h4>
+                        <div class="room-selection" id="roomSelection"></div>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="confirmRoom" disabled>Place Selected Room</button>
+                            <div class="action-buttons-row">
+                                <button class="btn btn-secondary" id="eatFood">🍎 Eat (+10)</button>
+                                <button class="btn btn-secondary" id="usePotion">💊 Potion (+25❤️)</button>
+                            </div>
+                            <div class="action-buttons-row">
+                                <button class="btn btn-secondary" id="rerollRooms">🎲 Reroll (5🪙)</button>
+                                <button class="btn btn-danger" id="endDay">🌙 End Day</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Tab -->
+                    <div class="tab-content" id="inventoryTab">
+                        <h4 style="margin-bottom: 10px; color:  #7eb8da;">Resources: </h4>
+                        <div class="inventory-grid" id="inventoryGrid"></div>
+                        <h4 style="margin: 15px 0 10px; color: #d4a5ff;">Artifacts:</h4>
+                        <div class="artifacts-list" id="artifactsList">
+                            <div style="color: #606060; font-style: italic;">No artifacts found yet... </div>
+                        </div>
+                    </div>
+
+                    <!-- Quests Tab -->
+                    <div class="tab-content" id="questsTab">
+                        <div id="questsList"></div>
+                        <h4 style="margin: 15px 0 10px; color:  #ffd700;">🏆 Achievements:</h4>
+                        <div class="achievements-bar" id="achievementsList"></div>
+                    </div>
+                </div>
+
+                <!-- Message Log -->
+                <div class="panel-section">
+                    <h3 class="panel-title">
+                        Event Log
+                        <span class="panel-title-badge" id="turnCounter">Turn 1</span>
+                    </h3>
+                    <div class="message-log" id="messageLog">
+                        <div class="message neutral"><span class="message-time">0</span> Welcome to Mt. Holly Estate... </div>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="panel-section">
+                    <h3 class="panel-title">📝 Notes (Permanent)</h3>
+                    <textarea class="notes-textarea" id="playerNotes" placeholder="Write clues and observations here.  Notes persist forever... "></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="dayEndModal">
+        <div class="modal">
+            <h2>⏰ Day Has Ended</h2>
+            <p>The mansion resets, but your knowledge and permanent upgrades remain... </p>
+            <div class="stats-summary">
+                <div class="stats-summary-row"><span>Rooms Explored: </span><strong id="roomsExplored">0</strong></div>
+                <div class="stats-summary-row"><span>Highest Rank:</span><strong id="highestRank">1</strong></div>
+                <div class="stats-summary-row"><span>XP Gained:</span><strong id="xpGained">0</strong></div>
+                <div class="stats-summary-row"><span>Total Days:</span><strong id="totalDays">1</strong></div>
+            </div>
+            <div id="dayEndRewards"></div>
+            <button class="btn btn-primary" onclick="startNewDay()">Begin New Day</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="victoryModal">
+        <div class="modal">
+            <h2>🎉 VICTORY!</h2>
+            <p>You've discovered the legendary Room 46! </p>
+            <p>The secrets of Mt. Holly Estate are finally revealed...</p>
+            <div class="stats-summary">
+                <div class="stats-summary-row"><span>Days Taken:</span><strong id="victoryDays">1</strong></div>
+                <div class="stats-summary-row"><span>Total Rooms:</span><strong id="victoryRooms">0</strong></div>
+                <div class="stats-summary-row"><span>Artifacts Found:</span><strong id="victoryArtifacts">0</strong></div>
+                <div class="stats-summary-row"><span>Final Score:</span><strong id="victoryScore">0</strong></div>
+            </div>
+            <button class="btn btn-primary" onclick="resetGame()">Play Again</button>
+            <button class="btn btn-success" onclick="continueExploring()" style="margin-top: 10px;">Continue Exploring</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="startModal">
+        <div class="modal">
+            <h2>🏰 Blue Prince</h2>
+            <p>Welcome to <strong>Mt. Holly Estate</strong>, a mysterious mansion that reshapes itself each day. </p>
+            <p>Your goal: Find the legendary <strong>Room 46</strong> hidden in the deepest ranks.</p>
+            <div class="stats-summary" style="text-align: left;">
+                <p>🚶 <strong>Steps</strong> - Movement resource (50/day)</p>
+                <p>❤️ <strong>Health</strong> - Survive dangerous rooms</p>
+                <p>🍎 <strong>Food</strong> - Restore steps</p>
+                <p>🔑 <strong>Keys</strong> - Unlock special rooms</p>
+                <p>💎 <strong>Gems</strong> - Buy permanent upgrades</p>
+                <p>📝 <strong>Notes</strong> - Your only truly permanent resource! </p>
+            </div>
+            <p><em>Choose rooms carefully.  Knowledge persists between runs.</em></p>
+            <button class="btn btn-primary" onclick="closeStartModal()">Enter the Estate</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="shopModal">
+        <div class="modal">
+            <h2>🏪 Merchant's Shop</h2>
+            <p>A traveling merchant offers their wares... </p>
+            <div class="shop-items" id="shopItems"></div>
+            <button class="btn btn-secondary" onclick="closeShop()">Leave Shop</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="puzzleModal">
+        <div class="modal">
+            <h2>🧩 Puzzle Room</h2>
+            <p id="puzzleDescription">Solve the puzzle to claim your reward... </p>
+            <div class="puzzle-container" id="puzzleContainer"></div>
+            <button class="btn btn-secondary" onclick="closePuzzle()">Give Up</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal">
+            <h2 id="eventTitle">⚡ Event</h2>
+            <p id="eventDescription"></p>
+            <div id="eventChoices"></div>
+        </div>
+    </div>
+
+    <div id="tooltip" class="tooltip" style="display: none;"></div>
+
+    <script>
+        // ============== ROOM DEFINITIONS ==============
+        const ROOM_TYPES = {
+            // === COMMON ROOMS ===
+            hallway: {
+                name: 'Hallway', icon: '🚪', rarity: 'common',
+                desc: 'A connecting passage', effect: 'Safe passage',
+                action: (g) => { return 'A simple hallway. '; }
+            },
+            storeroom: {
+                name: 'Storeroom', icon:  '📦', rarity: 'common',
+                desc: 'Dusty supplies fill the shelves', effect: '+2 Food',
+                action: (g) => { g.food += 2; return '+2 Food found! '; }
+            },
+            study: {
+                name: 'Study', icon: '📖', rarity: 'common',
+                desc: 'Books line every wall', effect: '+15 XP',
+                action:  (g) => { g.xp += 15; return '+15 XP from reading!'; }
+            },
+            pantry: {
+                name: 'Pantry', icon: '🥫', rarity: 'common',
+                desc: 'Preserved foods remain', effect: '+1 Food',
+                action: (g) => { g.food += 1; return '+1 Food found!'; }
+            },
+
+            // === UNCOMMON ROOMS ===
+            treasury: {
+                name: 'Treasury', icon: '💰', rarity: 'uncommon',
+                desc: 'Glittering coins fill the shelves', effect: '+20 Coins',
+                action: (g) => { g.coins += 20; return '+20 Coins collected!'; }
+            },
+            gemChamber: {
+                name: 'Gem Chamber', icon: '💎', rarity: 'uncommon',
+                desc: 'Precious gems catch the light', effect: '+2 Gems',
+                action:  (g) => { g.gems += 2; return '+2 Gems acquired!'; }
+            },
+            armory: {
+                name: 'Armory', icon: '⚔️', rarity: 'uncommon',
+                desc:  'Ancient weapons on display', effect: '+1 Weapon',
+                category: 'secret',
+                action: (g) => { 
+                    g.addArtifact('rusty_sword');
+                    return 'Found a Rusty Sword!'; 
+                }
+            },
+            kitchen: {
+                name: 'Kitchen', icon: '🍳', rarity: 'uncommon',
+                desc: 'Fresh food is being prepared', effect: '+3 Food',
+                action: (g) => { g.food += 3; return '+3 Food prepared!'; }
+            },
+            observatory: {
+                name: 'Observatory', icon: '🔭', rarity: 'uncommon',
+                desc: 'Stars map the path ahead', effect: '+8 Steps',
+                action: (g) => { g.steps += 8; return 'The stars guide you:  +8 Steps!'; }
+            },
+            garden: {
+                name: 'Garden', icon: '🌿', rarity: 'uncommon',
+                desc: 'A peaceful indoor garden', effect: '+2 Food, +5 Steps',
+                action: (g) => { g.food += 2; g.steps += 5; return '+2 Food, +5 Steps!'; }
+            },
+            infirmary: {
+                name:  'Infirmary', icon: '🏥', rarity: 'uncommon',
+                desc: 'Medical supplies remain', effect: '+30 Health, +1 Potion',
+                action: (g) => { g.health = Math.min(100, g.health + 30); g.potions += 1; return '+30 Health, +1 Potion!'; }
+            },
+
+            // === RARE ROOMS ===
+            library: {
+                name: 'Ancient Library', icon: '📚', rarity: 'rare',
+                desc: 'Forbidden knowledge awaits', effect: '+30 XP, Clue',
+                action: (g) => { 
+                    g.xp += 30;
+                    g.addMessage('📜 Clue:  "Room 46 appears only to those who reach Rank 7..."', 'special');
+                    return '+30 XP and a mysterious clue!'; 
+                }
+            },
+            keymakers: {
+                name: "Keymaker's Workshop", icon: '🔑', rarity: 'rare',
+                desc: 'Keys of all shapes hang on walls', effect: '+2 Keys',
+                action: (g) => { g.keys += 2; return '+2 Keys obtained!'; }
+            },
+            gallery: {
+                name: 'Art Gallery', icon: '🖼️', rarity: 'rare',
+                desc: 'Priceless paintings line the walls', effect: '+3 Gems',
+                action: (g) => { g.gems += 3; return '+3 Gems from valuable art!'; }
+            },
+            coatCheck: {
+                name: 'Coat Check', icon: '🧥', rarity: 'rare',
+                desc: 'Lost items await their owners', effect: 'Random valuable',
+                action: (g) => { 
+                    const r = Math.random();
+                    if (r < 0.25) { g.keys += 2; return '+2 Keys found in a coat pocket!'; }
+                    else if (r < 0.5) { g.coins += 30; return '+30 Coins discovered!'; }
+                    else if (r < 0.75) { g.gems += 2; return '+2 Gems found!'; }
+                    else { g.addArtifact('lucky_coin'); return 'Found a Lucky Coin artifact!'; }
+                }
+            },
+            shrine: {
+                name: 'Shrine', icon: '⛩️', rarity: 'rare',
+                desc: 'A place of ancient power', effect: '+50 XP, Blessing',
+                action: (g) => {
+                    g.xp += 50;
+                    g. blessings += 1;
+                    return '+50 XP and received a Blessing!';
+                }
+            },
+
+            // === EPIC ROOMS ===
+            vault: {
+                name: 'Grand Vault', icon: '🏦', rarity: 'epic',
+                desc: 'Heavily secured treasury', effect: 'Costs 1 Key, +50 Coins, +3 Gems',
+                cost: { keys: 1 },
+                action: (g) => { 
+                    if (g.keys > 0) { 
+                        g.keys -= 1; 
+                        g.coins += 50; 
+                        g.gems += 3;
+                        return 'Vault opened! +50 Coins, +3 Gems!'; 
+                    }
+                    return '🔒 Locked! You need a key. '; 
+                }
+            },
+            artifactRoom: {
+                name:  'Artifact Chamber', icon: '🏺', rarity: 'epic',
+                desc: 'Ancient relics of power', effect: 'Random Artifact',
+                category: 'secret',
+                action: (g) => {
+                    const artifacts = ['compass', 'map_fragment', 'crystal_ball', 'ancient_tome'];
+                    const artifact = artifacts[Math.floor(Math.random() * artifacts.length)];
+                    g.addArtifact(artifact);
+                    return `Found artifact: ${ARTIFACTS[artifact]. name}! `;
+                }
+            },
+            alchemyLab: {
+                name: 'Alchemy Lab', icon:  '⚗️', rarity: 'epic',
+                desc: 'Bubbling potions everywhere', effect: '+3 Potions, +20 Health',
+                action: (g) => {
+                    g.potions += 3;
+                    g. health = Math.min(100, g. health + 20);
+                    return '+3 Potions and +20 Health!';
+                }
+            },
+
+            // === SHOP ROOMS ===
+            merchant: {
+                name: "Merchant's Shop", icon: '🏪', rarity: 'uncommon',
+                desc: 'A traveling merchant', effect: 'Buy items',
+                category: 'shop',
+                action: (g) => {
+                    g.openShop();
+                    return 'The merchant greets you... ';
+                }
+            },
+            blackMarket: {
+                name: 'Black Market', icon: '🎭', rarity: 'rare',
+                desc: 'Illegal goods for sale', effect: 'Rare items available',
+                category: 'shop',
+                action: (g) => {
+                    g.openShop('blackMarket');
+                    return 'Shady dealers emerge from the shadows...';
+                }
+            },
+
+            // === PUZZLE ROOMS ===
+            puzzleRoom: {
+                name: 'Puzzle Room', icon: '🧩', rarity: 'rare',
+                desc: 'Solve the riddle', effect: 'Reward on success',
+                action: (g) => {
+                    g.openPuzzle('sequence');
+                    return 'A mysterious puzzle appears...';
+                }
+            },
+            riddleRoom: {
+                name:  'Riddle Chamber', icon: '❓', rarity: 'rare',
+                desc: 'Answer correctly to proceed', effect: 'Big reward or penalty',
+                action: (g) => {
+                    g.openPuzzle('riddle');
+                    return 'A sphinx poses a riddle...';
+                }
+            },
+
+            // === DANGER ROOMS ===
+            chapel: {
+                name: 'Haunted Chapel', icon: '⛪', rarity: 'common',
+                desc: 'Ghostly whispers echo', effect: '-5 Steps',
+                category: 'danger',
+                action: (g) => { g.steps -= 5; return 'Ghosts drain your energy:  -5 Steps'; }
+            },
+            dungeon: {
+                name: 'Dark Dungeon', icon: '⛓️', rarity: 'uncommon',
+                desc: 'Dark and dangerous', effect: '-10 Health or 1 Key',
+                category: 'danger',
+                action: (g) => { 
+                    if (g.keys > 0) { 
+                        g.keys -= 1; 
+                        return 'Used a key to escape safely! '; 
+                    }
+                    g.health -= 10;
+                    return 'Trapped!  -10 Health to escape.'; 
+                }
+            },
+            trapRoom: {
+                name: 'Trap Room', icon: '💀', rarity: 'uncommon',
+                desc: 'Deadly mechanisms everywhere', effect: '-20 Health',
+                category: 'danger',
+                action: (g) => {
+                    const damage = g.hasArtifact('shield') ? 10 : 20;
+                    g.health -= damage;
+                    return `Traps spring!  -${damage} Health! `;
+                }
+            },
+            cursedRoom: {
+                name:  'Cursed Chamber', icon: '👻', rarity: 'rare',
+                desc: 'Dark magic lingers here', effect: '-15 Health, -10 Coins',
+                category: 'danger',
+                action: (g) => {
+                    if (g.blessings > 0) {
+                        g.blessings -= 1;
+                        return 'Your blessing protected you!';
+                    }
+                    g.health -= 15;
+                    g.coins = Math.max(0, g.coins - 10);
+                    return 'Cursed! -15 Health, -10 Coins!';
+                }
+            },
+            bossRoom: {
+                name:  'Guardian Chamber', icon: '🐉', rarity: 'epic',
+                desc: 'A powerful guardian awaits', effect: 'Combat required',
+                category: 'danger',
+                action: (g) => {
+                    g.openEvent('boss');
+                    return 'A guardian blocks your path!';
+                }
+            },
+
+            // === EVENT ROOMS ===
+            fortuneTeller: {
+                name: 'Fortune Teller', icon: '🔮', rarity: 'rare',
+                desc: 'See your future... ', effect: 'Reveals information',
+                action: (g) => {
+                    const hints = [
+                        'Room 46 requires reaching Rank 8 or higher.. .',
+                        'The Compass artifact reveals hidden paths...',
+                        'Blessings protect against curses...',
+                        'The Black Market sells powerful artifacts...',
+                        'Each day, the mansion grows more dangerous...'
+                    ];
+                    const hint = hints[Math.floor(Math.random() * hints.length)];
+                    g.addMessage(`🔮 Vision: "${hint}"`, 'special');
+                    return 'The fortune teller shares a vision...';
+                }
+            },
+            fountain: {
+                name: 'Wishing Fountain', icon: '⛲', rarity: 'rare',
+                desc: 'Toss a coin, make a wish', effect: 'Random effect',
+                action: (g) => {
+                    if (g.coins >= 5) {
+                        g.coins -= 5;
+                        const r = Math.random();
+                        if (r < 0.3) { g.steps += 20; return 'Wish granted! +20 Steps!'; }
+                        else if (r < 0.5) { g.gems += 5; return 'Wish granted!  +5 Gems!'; }
+                        else if (r < 0.7) { g.health = 100; return 'Wish granted! Full Health!'; }
+                        else if (r < 0.9) { g.keys += 2; return 'Wish granted! +2 Keys! '; }
+                        else { g.coins += 50; return 'JACKPOT! +50 Coins!'; }
+                    }
+                    return 'You need 5 coins to make a wish... ';
+                }
+            },
+            mysteryRoom: {
+                name: 'Mystery Room', icon: '❔', rarity: 'uncommon',
+                desc: '??? ', effect: '???',
+                action: (g) => {
+                    g.openEvent('mystery');
+                    return 'Something strange happens...';
+                }
+            },
+
+            // === LEGENDARY ===
+            appleOrchard: {
+                name: 'Apple Orchard', icon:  '🍎', rarity:  'legendary',
+                desc:  'A magical orchard', effect: 'PERMANENT:  +5 Starting Steps',
+                category: 'secret',
+                action: (g) => {
+                    if (! g.permanentUpgrades. includes('orchard')) {
+                        g. permanentUpgrades.push('orchard');
+                        g. baseSteps += 5;
+                        g.savePermanent();
+                        return '🌟 PERMANENT UPGRADE: +5 Starting Steps forever!';
+                    }
+                    g.food += 5;
+                    return 'The orchard gives +5 Food!';
+                }
+            },
+            ancientForge: {
+                name: 'Ancient Forge', icon: '🔨', rarity: 'legendary',
+                desc: 'Legendary crafting station', effect: 'PERMANENT: +1 Starting Key',
+                category: 'secret',
+                action: (g) => {
+                    if (!g.permanentUpgrades.includes('forge')) {
+                        g.permanentUpgrades.push('forge');
+                        g. baseKeys += 1;
+                        g.savePermanent();
+                        return '🌟 PERMANENT UPGRADE: +1 Starting Key forever!';
+                    }
+                    g.keys += 2;
+                    return 'The forge creates +2 Keys!';
+                }
+            },
+            crystalCave: {
+                name: 'Crystal Cave', icon: '💠', rarity: 'legendary',
+                desc: 'Magical crystal formations', effect: 'PERMANENT: +2 Starting Gems',
+                category: 'secret',
+                action: (g) => {
+                    if (!g.permanentUpgrades.includes('crystal')) {
+                        g.permanentUpgrades.push('crystal');
+                        g.baseGems += 2;
+                        g.savePermanent();
+                        return '🌟 PERMANENT UPGRADE: +2 Starting Gems forever!';
+                    }
+                    g.gems += 3;
+                    return 'The cave yields +3 Gems!';
+                }
+            },
+
+            // === GOAL ===
+            room46: {
+                name: 'Room 46', icon: '👑', rarity: 'legendary',
+                desc: 'The legendary room! ', effect: 'VICTORY! ',
+                category: 'room46',
+                action: (g) => { g.victory(); return 'You found Room 46!'; }
+            }
+        };
+
+        // ============== ARTIFACTS ==============
+        const ARTIFACTS = {
+            rusty_sword: { name: 'Rusty Sword', icon: '🗡️', desc: '+5 damage in combat', effect: 'combat_bonus' },
+            lucky_coin: { name: 'Lucky Coin', icon: '🪙', desc: '+10% better rewards', effect: 'luck_bonus' },
+            compass:  { name: 'Mystic Compass', icon: '🧭', desc: 'Shows Room 46 direction', effect: 'compass' },
+            map_fragment: { name: 'Map Fragment', icon: '🗺️', desc: 'Reveals room types', effect: 'reveal' },
+            crystal_ball: { name: 'Crystal Ball', icon: '🔮', desc:  'Preview room choices', effect: 'preview' },
+            ancient_tome: { name: 'Ancient Tome', icon: '📕', desc: '+50% XP gain', effect: 'xp_bonus' },
+            shield: { name: 'Guardian Shield', icon: '🛡️', desc: 'Halves trap damage', effect: 'defense' },
+            boots: { name: 'Swift Boots', icon: '👢', desc: '+3 Steps per room', effect: 'speed' },
+            amulet: { name: 'Life Amulet', icon: '📿', desc: 'Revive once per day', effect: 'revive' },
+            crown: { name: 'Royal Crown', icon: '👑', desc: 'Shops 50
